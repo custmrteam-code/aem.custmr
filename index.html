@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AEM</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: #f2eaea;
+            cursor: none;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            right: 0;
+            padding: 40px 60px;
+            z-index: 100;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 50px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #000;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: opacity 0.3s;
+
+        }
+
+        nav a:hover {
+            opacity: 0.6;
+            cursor: none;
+        }
+
+        nav .crosshair+a:hover {
+            opacity: 0.3;
+        }
+
+        /* Main Content */
+        .container {
+            position: absolute;
+            left: 0;
+            bottom: -1%;
+        }
+
+        .logo {
+            
+            font-size: 35vw;
+            font-weight: 900;
+            color: #000;
+            letter-spacing: -0.05em;
+            user-select: none;
+            line-height: 0.7;
+            transform: translateY(10%);
+        }
+
+        /* Crosshair Overlay */
+        .crosshair {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+        }
+
+        .crosshair-svg {
+            width: 100%;
+            height: 100%;
+            
+        
+        }
+
+        .crosshair-line {
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+
+        .line-top {
+            width: 1px;
+            height: 100vh;
+            left: 50%;
+            bottom: 50%;
+            transform: translateX(-50%);
+            transform-origin: bottom;
+        }
+
+        .line-bottom {
+            width: 1px;
+            height: 100vh;
+            left: 50%;
+            top: 50%;
+            transform: translateX(-50%);
+            transform-origin: top;
+        }
+
+        .line-left {
+            height: 1px;
+            width: 100vw;
+            top: 50%;
+            right: 50%;
+            transform: translateY(-50%);
+            transform-origin: right;
+        }
+
+        .line-right {
+            height: 1px;
+            width: 100vw;
+            top: 50%;
+            left: 50%;
+            transform: translateY(-50%);
+            transform-origin: left;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#models">MODELS</a></li>
+            <li><a href="#about">ABOUT</a></li>
+            <li><a href="#apply">APPLY</a></li>
+            <li><a href="#contact">CONTACT US</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="logo">AEM</div>
+    </div>
+
+    <!-- Crosshair Overlay -->
+    <div class="crosshair" id="crosshair">
+        <div class="crosshair-line line-top"></div>
+        <div class="crosshair-line line-right"></div>
+        <div class="crosshair-line line-bottom"></div>
+        <div class="crosshair-line line-left"></div>
+        <svg class="crosshair-svg" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+            <!-- Inner circle (removed outer circle) -->
+            <circle cx="30" cy="30" r="14" fill="none" stroke="#000" stroke-width="1"/>
+            <!-- Center filled circle -->
+            <circle cx="30" cy="30" r="6" fill="#000"/>
+            <!-- Top line -->
+            <line x1="30" y1="5" x2="30" y2="16" stroke="#000" stroke-width="1"/>
+            <!-- Right line -->
+            <line x1="44" y1="30" x2="55" y2="30" stroke="#000" stroke-width="1"/>
+            <!-- Bottom line -->
+            <line x1="30" y1="44" x2="30" y2="55" stroke="#000" stroke-width="1"/>
+            <!-- Left line -->
+            <line x1="16" y1="30" x2="5" y2="30" stroke="#000" stroke-width="1"/>
+        </svg>
+    </div>
+
+    <script>
+        const crosshair = document.getElementById('crosshair');
+        
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX;
+            const y = e.clientY;
+            
+            crosshair.style.left = x + 'px';
+            crosshair.style.top = y + 'px';
+        });
+
+        // Show crosshair only when mouse is inside the window
+        document.addEventListener('mouseenter', () => {
+            crosshair.style.display = 'block';
+        });
+
+        document.addEventListener('mouseleave', () => {
+            crosshair.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
